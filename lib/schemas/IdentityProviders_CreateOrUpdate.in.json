@@ -1,0 +1,83 @@
+{
+    "type": "object",
+    "properties": {
+        "resourceGroupName": {
+            "required": true,
+            "type": "string"
+        },
+        "serviceName": {
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$"
+        },
+        "identityProviderName": {
+            "required": true,
+            "type": "string",
+            "enum": [
+                "facebook",
+                "google",
+                "microsoft",
+                "twitter",
+                "aad",
+                "aadB2C"
+            ]
+        },
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "description": "The external Identity Providers like Facebook, Google, Microsoft, Twitter or Azure Active Directory which can be used to enable access to the API Management service developer portal for all users.",
+            "externalDocs": {
+                "url": "https://docs.microsoft.com/en-us/azure/api-management/api-management-howto-aad#how-to-authorize-developer-accounts-using-azure-active-directory"
+            },
+            "properties": {
+                "allowedTenants": {
+                    "description": "List of Allowed Tenants when configuring Azure Active Directory login.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "maxItems": 32,
+                    "type": "array"
+                },
+                "clientId": {
+                    "description": "Client Id of the Application in the external Identity Provider. It is App ID for Facebook login, Client ID for Google login, App ID for Microsoft.",
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "clientSecret": {
+                    "description": "Client secret of the Application in external Identity Provider, used to authenticate login request. For example, it is App Secret for Facebook login, API Key for Google login, Public Key for Microsoft.",
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "type": {
+                    "description": "Identity Provider Type identifier.",
+                    "enum": [
+                        "facebook",
+                        "google",
+                        "microsoft",
+                        "twitter",
+                        "aad",
+                        "aadB2C"
+                    ],
+                    "type": "string",
+                    "x-ms-enum": {
+                        "modelAsString": true,
+                        "name": "IdentityProviderNameType"
+                    }
+                }
+            },
+            "required": [
+                "clientId",
+                "clientSecret"
+            ],
+            "type": "object"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

@@ -1,0 +1,64 @@
+{
+    "type": "object",
+    "properties": {
+        "resourceGroupName": {
+            "required": true,
+            "type": "string"
+        },
+        "serviceName": {
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$"
+        },
+        "identityProviderName": {
+            "required": true,
+            "type": "string",
+            "enum": [
+                "facebook",
+                "google",
+                "microsoft",
+                "twitter",
+                "aad",
+                "aadB2C"
+            ]
+        },
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "description": "Parameters supplied to the Update Identity Provider operation.",
+            "properties": {
+                "allowedTenants": {
+                    "description": "List of Allowed Tenants when configuring Azure Active Directory login.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "maxItems": 32,
+                    "type": "array"
+                },
+                "clientId": {
+                    "description": "Client Id of the Application in the external Identity Provider. It is App ID for Facebook login, Client ID for Google login, App ID for Microsoft.",
+                    "minLength": 1,
+                    "type": "string"
+                },
+                "clientSecret": {
+                    "description": "Client secret of the Application in external Identity Provider, used to authenticate login request. For example, it is App Secret for Facebook login, API Key for Google login, Public Key for Microsoft.",
+                    "minLength": 1,
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "If_Match": {
+            "required": true,
+            "type": "string"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}
